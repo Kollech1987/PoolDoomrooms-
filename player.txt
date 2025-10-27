@@ -1,0 +1,11 @@
+actor VerdammnisPlayer : DoomPlayer
+{
+ Speed 0.26
+  Scale 1.0
+  Health 175
+  Radius 16
+  Height 56
+  Mass 100
+  Bloodcolor Red
+  Player.DisplayName "V-T-G-Player"
+}

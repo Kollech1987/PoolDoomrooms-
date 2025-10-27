@@ -1,0 +1,42 @@
+gameinfo
+{
+    playerclasses = "VerdammnisPlayer"
+}
+
+
+
+
+ClearSkills
+
+Skill Ververyeasy
+{
+	Aggressiveness = 0.1
+	AmmoFactor = 2.5
+	DamageFactor = 0.10
+	DropAmmoFactor = 1
+	MonsterHealth = 0.5
+	AutoUseHealth
+	SpawnFilter = easy
+	Textcolor = Red
+	Name = "Turn Around"
+	
+}
+//Karten
+map MAP01 "Endless Pools"
+{
+//titlepatch "CWILV00"
+next = "MAP02"
+music = L37AM
+EvenLighting
+SmoothLighting
+nointermission
+}
+
+map MAP02 "Endless Pools II"
+{
+//titlepatch "CWILV00"
+next = "MAP03"
+music = L37AM
+EvenLighting
+SmoothLighting
+}

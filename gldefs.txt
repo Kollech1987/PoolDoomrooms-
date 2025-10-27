@@ -1,0 +1,82 @@
+brightmap texture WHT
+{
+   map WHT_BM
+   [iwad]
+   [thiswad]
+   [disablefullbright]
+}
+
+brightmap texture L0CLT
+{
+   map L0CLT_BM
+   [iwad]
+   [thiswad]
+   [disablefullbright]
+}
+
+brightmap texture L1CLT
+{
+   map L1CLT_BM
+   [iwad]
+   [thiswad]
+   [disablefullbright]
+}
+
+brightmap texture L1LPL
+{
+   map L1LPL_BM
+   [iwad]
+   [thiswad]
+   [disablefullbright]
+}
+
+brightmap texture LWHLT
+{
+   map HLTBM
+   [iwad]
+   [thiswad]
+   [disablefullbright]
+}
+
+skybox NGTSKY
+{
+  NIGHTSKY
+  NIGHTSKY
+  NIGHTSKY
+}
+
+
+Skybox DAYSKY fliptop
+{
+  DSKYN
+  DSKYE
+  DSKYS
+  DSKYW
+  DSKYT
+  DSKYB
+}
+
+Skybox LN5SKY fliptop
+{
+  N5KYN
+  N5KYE
+  N5KYS
+  N5KYW
+  N5KYT
+  N5KYB
+}
+
+//Flare
+FlickerLight FLARE
+{
+    color 1.0 0.3 0.3
+    size 42
+    secondarySize 40
+    Chance 0.05
+    offset 0 16 0
+}
+
+object ActiveFlare
+{
+    frame FLAR { light FLARE }
+}

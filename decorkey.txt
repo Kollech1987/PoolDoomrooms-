@@ -1,0 +1,134 @@
+//In order to pass barrier door, you need to revisit ALL levels. (at least levels with numbers) Total 20 levels must be revisited
+//Barrier will check if these keys are on you.
+
+ACTOR BarKey : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR BarLevelCount : Inventory
+{
+   Inventory.MaxAmount 20
+   Inventory.InterHubAmount 20
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L0Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L1Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L2Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L4Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L5Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L6Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L7Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L9Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L10Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L11Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L37Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L791Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR L989Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR LN3Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR LN5Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR LN6Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR LN33Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+ACTOR LN40Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR LN250Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+ACTOR LN0Key : Inventory
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}

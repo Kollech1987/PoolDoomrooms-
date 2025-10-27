@@ -1,0 +1,1019 @@
+#include "DECORKEY" //Barrier door keys which will given in each level if barrier key is on player.
+#include "PLAYER"
+
+actor AlmondWater : CustomInventory 2000
+{
+	Inventory.PickupMessage "Picked up Almond Water."
+	Inventory.Amount 1
+	Inventory.MaxAmount 6
+	Inventory.InterHubAmount 6
+	Inventory.Icon "ALICON"
+	Tag "Almond Water"
+	+INVBAR
+	-COUNTITEM
+	Scale 0.1
+	states
+	{
+	Spawn:
+		ALWT A -1
+		Stop
+	Use:
+		TNT1 A 0 A_GiveInventory("Shell",50)
+		TNT1 A 0 A_GiveInventory("Medikit",1)
+		TNT1 A 0 A_PlaySound("SODA",CHAN_AUTO,2)
+		Stop
+	}
+}
+
+actor L5Plant 1000
+{
+	Radius 10
+    Height 10
+	xscale 0.05
+	yscale 0.05
+	states
+	{
+	Spawn:
+		L5PL A -1
+		Stop
+	}
+}
+
+actor Tree 1001
+{
+	Radius 30
+    Height 100
+	xscale 1.6
+	yscale 1
+	+SOLID
+	states
+	{
+	Spawn:
+		TREE A -1
+		Stop
+	}
+}
+
+actor Tree2 1002
+{
+	Radius 30
+    Height 100
+	Scale 0.2
+	+SOLID
+	states
+	{
+	Spawn:
+		TREB A -1
+		Stop
+	}
+}
+
+
+actor Grass 1003
+{
+	Radius 30
+    Height 10
+	Scale 0.2
+	states
+	{
+	Spawn:
+		GRSS A -1
+		Stop
+	}
+}
+
+actor TheEndDoor 1004
+{
+	Radius 30
+    Height 75
+	xscale 0.20
+	yscale 0.15
+	+SOLID
+	+WALLSPRITE
+	+USESPECIAL
+	states
+	{
+	Spawn:
+		ENDD A -1
+		Stop
+	}
+}
+
+actor Level5PertifiedTree 1005
+{
+	Radius 30
+    Height 300
+	scale 0.3
+	+SOLID
+	states
+	{
+	Spawn:
+		PFPT A -1
+		Stop
+	}
+}
+
+actor Level5BurningTree 1006
+{
+	Radius 30
+    Height 300
+	scale 0.3
+	+SOLID
+	states
+	{
+	Spawn:
+		BFTR A -1
+		Stop
+	}
+}
+
+actor Level5Gemfruit 1007 //You gotta be fucking kidding...
+{
+  Health 9999
+  PainChance 0
+  Speed 0
+  Radius 20
+  Height 5
+  Mass 400
+  Scale 0.08
+  Monster
+  DeathSound "GFBRK"
+  States
+	{
+	Spawn:
+		PFGF A 1 A_Look
+		Loop
+	See:
+		PFGF A 1 A_Chase
+		Loop
+	Melee:
+		PFGF A 1 A_SetScale(0.1,0.01)
+		PFGF A 1 A_FaceTarget
+		PFGF A 1 A_PlaySound("Dude_GottaBeKidding1",CHAN_BODY,5.0)
+		//A funny easter egg for who plays Postal:Share the Doom with this wad for some reason... (I did... with Cordie Companion mod from Cliffside... I regret nothing.)
+		PFGF A 40 A_Scream
+		PFGF A 1 ACS_Execute(3,0)
+		Goto See 
+	}
+}
+
+actor Level6RottenTree 1008 //It can Choose Random Sprite. Wow.
+{
+	Radius 30
+    Height 300
+	scale 0.3
+	+SOLID
+	states
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(256,1,2,3,4)
+		PNTR ABCD 0 A_Jump(256,"HoldFrame")
+	HoldFrame:
+		"----" A -1
+		Stop
+	}
+}
+
+actor Level33PalmTree 1009
+{
+	Radius 30
+    Height 300
+	scale 0.7
+	+SOLID
+	states
+	{
+	Spawn:
+		PALM A -1
+		Stop
+	}
+}
+
+actor ExitPylon 1010 //Normal Pylon that makes you exit.
+{
+	Radius 20
+    Height 400
+	scale 0.7
+	+SOLID
+	+USESPECIAL
+	states
+	{
+	Spawn:
+		EXPY A -1
+		Stop
+	}
+}
+
+
+actor PredatoryPylon 1011 //Level -250 pylon, code is inspired from an SCP wad
+{
+	Health 1000000
+	Speed 5
+	Radius 20
+	Height 400
+	Mass 500
+	Scale 0.7
+	MONSTER
+	-COUNTKILL
+	+LOOKALLAROUND
+	+NOTARGET
+	+NOTARGETSWITCH
+	+NOINFIGHTING
+	+NOFEAR
+	+CANTSEEK
+	+SOLID
+	-SHOOTABLE
+	+OLDRADIUSDMG
+	+STANDSTILL
+	Obituary "%o Was crushed by an Predatory Pylon."
+	States
+	{
+	Spawn:
+		PRPL A 1 A_Wander
+		PRPL A 0 A_Look
+		Loop
+	See:
+		PRPL A 0 A_JumpIfInTargetLOS("LOS", 130, JLOSF_DEADNOJUMP)
+		PRPL A 1 A_Chase
+		Goto See
+	Melee:
+		PRPL A 1 A_JumpIfInTargetLOS("LOS", 130, JLOSF_DEADNOJUMP)
+		PRPL A 0 A_FaceTarget
+		PRPL A 0 A_CustomMeleeAttack(1000)
+		PRPL A 0 A_Chase
+		PRPL A 0 A_FaceTarget
+		Goto See
+	LOS:
+		//If there the player have a direct line of sight, stop any movement
+		PRPL A 1
+		PRPL A 1 A_JumpIfInTargetLOS("LOS", 130, JLOSF_DEADNOJUMP)
+		Goto See
+	Death:
+		PRPL A 0 A_FaceTarget
+		Goto See
+}
+}
+
+actor Level255Tree 1012 //Level -6 tree but with -250 styled sprites
+{
+	Radius 30
+    Height 300
+	scale 0.3
+	+SOLID
+	states
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(256,1,2,3)
+		PPTR ABC 0 A_Jump(256,"HoldFrame")
+	HoldFrame:
+		"----" A -1
+		Stop
+	}
+}
+
+actor Pole 1013 //Pole.. just for decorative purposes...
+{
+	Radius 20
+    Height 250
+	scale 0.4
+	+SOLID
+	states
+	{
+	Spawn:
+		PPPL A -1
+		Stop
+	}
+}
+
+actor Bust 1014 //Level -1000 Bust, nothing special about it.
+{
+	Radius 15
+    Height 50
+	scale 0.15
+	+SOLID
+	states
+	{
+	Spawn:
+		BHLB A -1
+		Stop
+	}
+}
+
+actor ExitSign 1015 //Level ! Signs
+{
+	Radius 15
+    Height 1
+	scale 0.05
+	+NOGRAVITY
+	+WALLSPRITE
+	states
+	{
+	Spawn:
+		REXT A -1
+		Stop
+	}
+}
+
+actor SFVLevelRun 1016 //FIRST FUCKING ENTITY AND I SPRITED IT HELL YEAH!(Level ! variant)
+{
+    Health 10000
+    Radius 10
+    Height 60
+	Scale 0.6
+	Speed 16
+	Obituary "%o was smashed down by an Sanguine Festivus Instance."
+	+SOLID
+	+LOOKALLAROUND
+	+NORADIUSDMG
+	+JUMPDOWN
+	+NOTRIGGER
+	+NODAMAGE
+states
+{
+    Spawn:
+        SFVI AB 15 A_Look
+        Loop
+	See:
+	    SFVW AAABBBCCCBBB 1 A_Chase
+		Loop
+	Melee:
+		SFVA A 5 A_CustomMeleeAttack(200)
+		SFVA BC 5 
+		Goto See
+}
+}
+
+actor SmilerLevelRun 1017 //Smiler which directly taken from fandom. Better than conventional version.(Level ! variant)
+{
+    Health 10000
+    Radius 20
+    Height 80
+	Scale 1.2
+	Speed 24
+	Obituary "%o was shred by an Smiler."
+	+SOLID
+	+LOOKALLAROUND
+	+NORADIUSDMG
+	+JUMPDOWN
+	+NOTRIGGER
+	+NODAMAGE
+states
+{
+    Spawn:
+        SMLR A 1 Bright A_Look
+        Loop
+	See:
+	    SMLR A 2 Bright A_Chase
+		Loop
+	Melee:
+		SMLR A 5 Bright A_CustomMeleeAttack(200)
+		Goto See
+}
+}
+
+ACTOR LRUNCheck : Inventory //Item for checking if player entered Level ! before.
+{
+   Inventory.MaxAmount 1
+   Inventory.Icon TNT1A0
+}
+
+actor BarrierTree 1018 //Level -6 tree but Barrier styled sprites
+{
+	Radius 30
+    Height 300
+	scale 0.3
+	+SOLID
+	states
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(256,1,2,3,4)
+		BRTR ABCD 0 A_Jump(256,"HoldFrame")
+	HoldFrame:
+		"----" A -1
+		Stop
+	}
+}
+
+actor Guard 1019 //Barrier Door Guard
+{
+	Radius 15
+    Height 50
+	scale 1
+	+FLOATBOB
+	+SOLID
+	states
+	{
+	Spawn:
+		BRKN A -1
+		Stop
+	}
+}
+
+//NIGHTMARE MODE ACTORS BEGIN WITH 6666
+
+actor NightmareModeAlmondWater : CustomInventory 6666
+{
+	Inventory.PickupMessage "Picked up Almond Water."
+	Inventory.Amount 1
+	Inventory.MaxAmount 3
+	Inventory.InterHubAmount 3
+	Inventory.Icon "ALICON"
+	Tag "Almond Water"
+	+INVBAR
+	-COUNTITEM
+	Scale 0.1
+	states
+	{
+	Spawn:
+		ALWT A -1
+		Stop
+	Use:
+		TNT1 A 0 {
+			A_GiveInventory("Shell",100);
+			A_GiveInventory("Medikit",1);
+			A_PlaySound("SODA",CHAN_AUTO,2);
+		}
+		Stop
+	}
+}
+
+//flare
+Actor Flare : CustomInventory 20110
+{
+  Radius 4
+  Height 18
+  +INVENTORY.INVBAR
+  Inventory.MaxAmount 20
+  Inventory.Icon "FLARD0"
+  Inventory.PickupMessage "You picked up a flare."
+  States
+  {
+  Spawn:
+    FLAR D -1
+    Stop
+  Use:
+    TNT1 A 1 A_SpawnItemEx ("ActiveFlare", 56, 0, 28, 0, 0, 0, 0, 1)
+    Stop
+  }
+}
+
+Actor ActiveFlare //You can give this a DoomEdNum, to place it in a map editor
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    FLAR A 0 Bright
+    FLAR A 0 Bright A_PlaySound("Flare/Light")
+    FLAR A 0 Bright A_PlaySoundEx("Flare/Loop", "SoundSlot7", 1, -1)
+    FLAR AB 1 Bright
+    Goto Spawn+3
+  }
+}
+
+Actor FlareBox : CustomInventory 20111
+{
+  Radius 28
+  Height 16
+  Inventory.PickupMessage "You picked up a box of flares."
+  States
+  {
+  Spawn:
+    FLAR C -1
+    Stop
+  Pickup:
+    TNT1 A 1 A_GiveInventory ("Flare", 5)
+    Stop
+  }
+}
+
+//Schirm
+ACTOR Umbrella 20112
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  States
+  {
+  Spawn:
+    UMBR A -1
+    Stop
+  }
+}
+
+//SINKA0
+ACTOR Sink1 20113
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  States
+  {
+  Spawn:
+    SINK A -1
+    Stop
+  }
+}
+
+//SINKB
+ACTOR Sink2 20114
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  States
+  {
+  Spawn:
+    SINK B -1
+    Stop
+  }
+}
+
+//TOIL A1
+ACTOR Toilet 20115
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  States
+  {
+  Spawn:
+    TOIL A -1
+    Stop
+  }
+}
+
+ACTOR Toilet2 20119
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  States
+  {
+  Spawn:
+    TOIL B -1
+    Stop
+  }
+}
+
+//TABLA0
+
+ACTOR Table 20116
+{
+  Game Doom
+  Radius 27
+  Height 32
+  +SOLID
+  States
+  {
+  Spawn:
+    TABL A -1
+    Stop
+  }
+}
+//SUNLA0
+ACTOR Sonneliege 20117
+{
+  Game Doom
+  Radius 40
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    SUNL A -1
+    Stop
+  }
+}
+
+ACTOR Sonneliege2 20118
+{
+  Game Doom
+  Radius 40
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    SUNL B -1
+    Stop
+  }
+}
+
+//"Monster"
+ACTOR Steve 20120
+{
+  Game Doom
+  Radius 32
+  Height 32
+  +SOLID
+  States
+  {
+  Spawn:
+    STEV A -1
+    Stop
+  }
+}
+
+ACTOR Lacher 20121
+{
+  Game Doom
+  Radius 32
+  Height 32
+  +SOLID
+  States
+  {
+  Spawn:
+    LACH A -1
+    Stop
+  }
+}
+//Shild
+ACTOR Schild 20122
+{
+  Game Doom
+  Radius 20
+  Height 32
+  +SOLID
+  States
+  {
+  Spawn:
+    SIGN A -1
+    Stop
+  }
+}
+//BROO
+ACTOR Besen 20123
+{
+  Game Doom
+  Radius 20
+  Height 32
+  +SOLID
+  States
+  {
+  Spawn:
+    BROO A -1
+    Stop
+  }
+}
+
+ACTOR Mop 20124
+{
+  Game Doom
+  Radius 20
+  Height 32
+  +SOLID
+  States
+  {
+  Spawn:
+    BROO B -1
+    Stop
+  }
+}
+
+//SHOW
+ACTOR Duschkopf 20125
+{
+  Game Doom
+  Radius 20
+  Height 16
+  +SOLID
+  States
+  {
+  Spawn:
+    SHOW A -1
+    Stop
+  }
+}
+//GDSO
+ACTOR Umbrella2 20126
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  States
+  {
+  Spawn:
+    GDSO A -1
+    Stop
+  }
+}
+
+//FLAM
+ACTOR Flamongo1 20127
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  +NOGRAVITY
+  //+PUSHABLE
+  States
+  {
+  Spawn:
+    FLAM A -1
+    Stop
+  }
+}
+
+ACTOR Flamongo2 20128
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  +NOGRAVITY
+  //+PUSHABLE
+  States
+  {
+  Spawn:
+    FLAM B -1
+    Stop
+  }
+}
+
+ACTOR Ente1 20129
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  +NOGRAVITY
+  //+PUSHABLE
+  States
+  {
+  Spawn:
+    RUBE A -1
+    Stop
+  }
+}
+
+ACTOR Ente2 20130
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  +NOGRAVITY
+  //+PUSHABLE
+  States
+  {
+  Spawn:
+    RUBE B -1
+    Stop
+  }
+}
+
+ACTOR Ente3 20131
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  +NOGRAVITY
+  //+PUSHABLE
+  States
+  {
+  Spawn:
+    RUBE C -1
+    Stop
+  }
+}
+
+ACTOR Enteklein 20132
+{
+  Game Doom
+  Radius 12
+  Height 12
+  +SOLID
+  +NOGRAVITY
+  //+PUSHABLE
+  States
+  {
+  Spawn:
+    RUBE D -1
+    Stop
+  }
+}
+
+ACTOR Enteklein2 20133
+{
+  Game Doom
+  Radius 12
+  Height 12
+  +SOLID
+  +NOGRAVITY
+  //+PUSHABLE
+  States
+  {
+  Spawn:
+    RUBE E -1
+    Stop
+  }
+}
+//Lampe
+ACTOR Lampe 20134
+{
+  Game Doom
+  Radius 15
+  Height 42
+  +SOLID
+  //+NOGRAVITY
+  //+PUSHABLE
+  States
+  {
+  Spawn:
+    PSTE A -1
+    Stop
+  }
+}
+
+//Hocker BENC
+ACTOR Hocker 20135
+{
+  Game Doom
+  Radius 15
+  Height 32
+  +SOLID
+  //+NOGRAVITY
+  //+PUSHABLE
+  States
+  {
+  Spawn:
+    BENC A -1
+    Stop
+  }
+}
+
+//USGN
+ACTOR Absperrung 20136
+{
+  Game Doom
+  Radius 20
+  Height 32
+  +SOLID
+  //+NOGRAVITY
+  //+PUSHABLE
+  +WALLSPRITE
+  States
+  {
+  Spawn:
+    USGN A -1
+    Stop
+  }
+}
+
+//GDSO
+ACTOR Bistro 20140
+{
+  Game Doom
+  Radius 25
+  Height 42
+  +SOLID
+  //+NOGRAVITY
+  //+PUSHABLE
+  //+WALLSPRITE
+  States
+  {
+  Spawn:
+    BIST A -1
+    Stop
+  }
+}
+
+//Fliegen
+Actor Bodiless_Swarm 20138
+{
+//$Category Power-ups
+ +Missile
+ +NoBlockmap
+ +NoGravity
+ +NoSector
+ +Clientsideonly
+ Radius 1
+ Height 64
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_PlaySoundEX("SFX/Buzz","Body",1)
+   TNT1 AAAAA 1 A_SpawnItemEx ("SwarmFly",frandom(-16,16),frandom(-16,16),frandom(-16,16))
+   TNT1 A -1
+   Stop
+ }
+}
+
+Actor Body_Swarm 
+{
+ +Missile
+ +NoBlockmap
+ +NoGravity
+ +NoSector
+ +Clientsideonly
+ Radius 1
+ Height 64
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_Jump(256,"Imp","Demon","ZombieMan","ShotgunGuy","CacoDemon","Player","GibbedPlayer")
+   Loop
+  Imp:
+   TNT1 A 0 A_SpawnItemEX("DeadDoomImp")
+   Goto MakeSwarm
+  Demon:
+   TNT1 A 0 A_SpawnItemEX("DeadDemon")
+   Goto MakeSwarm
+  ZombieMan:
+   TNT1 A 0 A_SpawnItemEX("DeadZombieMan")
+   Goto MakeSwarm
+  ShotgunGuy:
+   TNT1 A 0 A_SpawnItemEX("DeadShotgunGuy")
+   Goto MakeSwarm
+  CacoDemon:
+   TNT1 A 0 A_SpawnItemEX("DeadCacodemon")
+   Goto MakeSwarm
+  Player:
+   TNT1 A 0 A_SpawnItemEX("DeadMarine")
+   Goto MakeSwarm
+  GibbedPlayer:
+   TNT1 A 0 A_SpawnItemEX("GibbedMarine")
+   Goto MakeSwarm
+  MakeSwarm:
+   TNT1 A 0 A_PlaySoundEX("SFX/Buzz","Body",1)
+   TNT1 AAAAA 1 A_SpawnItemEx ("SwarmFly",frandom(-16,16),frandom(-16,16),frandom(-16,16))
+   TNT1 A -1
+   Stop
+ }
+}
+
+ACTOR SwarmFly 
+{
+Radius 1
+Height 1
+Speed 5
+PROJECTILE
++NOCLIP
+ReactionTime 4
+Scale 0.25
+States
+{
+Spawn:
+Spawn:
+SFLY A 1 ThrustThingZ(0, random (-1, 1), random (1, 0), 1)	TNT1 A 0 A_ChangeVelocity(frandom(-2,2),frandom(-1,1),frandom(-2,2),1)
+SFLY B 1 ThrustThingZ(0, random (-1, 1), random (1, 0), 1)	TNT1 A 0 A_ChangeVelocity(frandom(-1,1),frandom(-2,2),frandom(-1,1),1)
+SFLY A 0 A_CountDown
+SFLY C 1 ThrustThingZ(0, random (-1, 1), random (1, 0), 1)	TNT1 A 0 A_ChangeVelocity(frandom(-2,2),frandom(-1,1),frandom(-2,2),1)
+SFLY B 1 ThrustThingZ(0, random (-1, 1), random (1, 0), 1)	TNT1 A 0 A_ChangeVelocity(frandom(-1,1),frandom(-2,2),frandom(-1,1),1)
+SFLY A 0 A_CountDown
+Loop
+Death:
+SFLY A 1 A_CustomMissile("SwarmFly",0,0,frandom(-20,20))
+Stop
+}
+}
+
+//Ball
+ACTOR Ball 20141
+{
+  Game Doom
+  Radius 25
+  Height 42
+  +SOLID
+  //+NOGRAVITY
+  +PUSHABLE
+  //+WALLSPRITE
+  States
+  {
+  Spawn:
+    BBAL A -1
+    Stop
+  }
+}
+
+//Demo Signe
+ACTOR UnderConstruction 20142
+{
+  Game Doom
+  Radius 31
+  Height 64
+  +SOLID
+  //+NOGRAVITY
+  //+PUSHABLE
+  +WALLSPRITE
+  States
+  {
+  Spawn:
+    CONS A -1
+    Stop
+  }
+}
